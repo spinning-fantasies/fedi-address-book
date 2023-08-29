@@ -1,2 +1,3 @@
-# masto-template
-A Mastodon application template
+# masto-address-book
+An address book for Mastodon followers
+
