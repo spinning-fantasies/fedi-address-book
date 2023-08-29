@@ -13,14 +13,6 @@
             <table class="table is-bordered is-fullwidth">
                 <thead>
                     <tr>
-                        <th>ID
-                            <a href="{{ url_for('index', sort='asc') }}">
-                                <i class="fas fa-sort-up"></i>
-                            </a>
-                            <a href="{{ url_for('index', sort='desc') }}">
-                                <i class="fas fa-sort-down"></i>
-                            </a>
-                        </th>
                         <th>Created At</th>
                         <th>Display Name</th>
                         <th>Account</th>
@@ -38,7 +30,6 @@
                 <tbody>
                     {% for follower in followers %}
                         <tr>
-                            <td>{{ follower[0] }}</td>
                             <td>{{ follower[1] }}</td>
                             <td>{{ follower[2] }}</td>
                             <td>{{ follower[3] }}</td>
