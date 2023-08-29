@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Follower</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Add a new follower</h1>
+            <form method="POST">
+                <div class="field">
+                    <label class="label"> Created At</label>
+                    <div class="control">
+                        <input class="input" type="date" name="created_at" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Display Name</label>
+                    <div class="control">
+                        <input class="input" name="display_name" required></input>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Account</label>
+                    <div class="control">
+                        <input class="input" type="text" name="acct" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Location</label>
+                    <div class="control">
+                        <input class="input" type="text" name="location" required>
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Create</button>
+                    </div>
+                    <div class="control">
+                        <a class="button is-text" href="{{ url_for('index') }}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

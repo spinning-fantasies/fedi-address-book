@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -25,6 +25,26 @@ def index():
 
     conn.close()
     return render_template('index.html', followers=followers)
+
+@app.route('/add_follower', methods=['GET', 'POST'])
+def add_follower():
+    if request.method == 'POST':
+        created_at = request.form['created_at']
+        display_name = request.form['display_name']
+        account = request.form['acct']
+        location = request.form['location']
+        
+        conn = sqlite3.connect('followers.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO followers (created_at, display_name, acct, location) VALUES (?, ?, ?, ?)',
+                       (created_at, display_name, account, location))
+        conn.commit()
+        conn.close()
+        
+        return redirect(url_for('index'))
+    
+    return render_template('add_follower.html')
+
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
