@@ -8,7 +8,19 @@ def index():
     conn = sqlite3.connect('followers.db')
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM followers WHERE is_deleted = 0')
+    sort_order = request.args.get('sort', 'asc')  # Default sorting order is ascending
+    if sort_order == 'asc':
+        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY id ASC')
+    else:
+        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY id DESC')
+
+    sort_location_order = request.args.get('sort_location', 'asc')  # Default sorting order is ascending
+    if sort_location_order == 'asc':
+        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY location ASC')
+    else:
+        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY location DESC')
+
+
     followers = cursor.fetchall()
 
     conn.close()

@@ -3,6 +3,7 @@
 <head>
     <title>Fediverse Address Book</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <section class="section">
@@ -11,11 +12,25 @@
             <table class="table is-bordered is-fullwidth">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>ID
+                            <a href="{{ url_for('index', sort='asc') }}">
+                                <i class="fas fa-sort-up"></i>
+                            </a>
+                            <a href="{{ url_for('index', sort='desc') }}">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+                        </th>
                         <th>Created At</th>
                         <th>Display Name</th>
                         <th>Account</th>
-                        <th>Location</th>
+                        <th>Location
+                            <a href="{{ url_for('index', sort_location='asc') }}">
+                                <i class="fas fa-sort-up"></i>
+                            </a>
+                            <a href="{{ url_for('index', sort_location='desc') }}">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+                        </th>
                         <th>Actions</th>
                     </tr>
                 </thead>
