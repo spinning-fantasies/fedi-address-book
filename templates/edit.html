@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Follower</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Edit Follower</h1>
+            <form method="post" action="{{ url_for('edit', id=follower[0]) }}">
+                <div class="field">
+                    <label class="label">Display Name</label>
+                    <div class="control">
+                        <input class="input" type="text" value="{{ follower[1] }}" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Account</label>
+                    <div class="control">
+                        <input class="input" type="text" value="{{ follower[2] }}" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Created At</label>
+                    <div class="control">
+                        <input class="input" type="text" value="{{ follower[3] }}" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Location</label>
+                    <div class="control">
+                        <input class="input" type="text" value="{{ follower[4] }}" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fediverse Address Book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Fediverse Address Book</h1>
+            <table class="table is-bordered is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Display Name</th>
+                        <th>Account</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for follower in followers %}
+                        <tr>
+                            <td>{{ follower[0] }}</td>
+                            <td>{{ follower[1] }}</td>
+                            <td>{{ follower[2] }}</td>
+                            <td>{{ follower[3] }}</td>
+                            <td>
+                                <a class="button is-small is-info" href="{{ url_for('edit', id=follower[0]) }}">Edit</a>
+                                <a class="button is-small is-warning" href="{{ url_for('delete', id=follower[0]) }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
