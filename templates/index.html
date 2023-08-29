@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Created At</th>
                         <th>Display Name</th>
                         <th>Account</th>
                         <th>Location</th>
@@ -25,6 +26,7 @@
                             <td>{{ follower[1] }}</td>
                             <td>{{ follower[2] }}</td>
                             <td>{{ follower[3] }}</td>
+                            <td>{{ follower[4] }}</td>
                             <td>
                                 <a class="button is-small is-info" href="{{ url_for('edit', id=follower[0]) }}">Edit</a>
                                 <a class="button is-small is-warning" href="{{ url_for('delete', id=follower[0]) }}">Delete</a>
