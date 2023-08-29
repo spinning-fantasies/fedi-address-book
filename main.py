@@ -23,9 +23,9 @@ def edit(id):
     follower = cursor.fetchone()
 
     if request.method == 'POST':
-        email = request.form['email']
+        location = request.form['location']
 
-        cursor.execute('UPDATE followers SET email = ? WHERE id = ?', (email, id))
+        cursor.execute('UPDATE followers SET location = ? WHERE id = ?', (location, id))
         conn.commit()
 
         cursor.execute('SELECT * FROM followers WHERE is_deleted = 0')
@@ -36,6 +36,7 @@ def edit(id):
 
     conn.close()
     return render_template('edit.html', follower=follower)
+
 
 @app.route('/delete/<int:id>')
 def delete(id):
