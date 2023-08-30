@@ -17,7 +17,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Created At</th>
+                        <th>Created At
+                            <a href="{{ url_for('index', sort_location=sort_location, sort_created_at='asc') }}">
+                                <i class="fas fa-sort-up"></i>
+                            </a>
+                            <a href="{{ url_for('index', sort_location=sort_location, sort_created_at='desc') }}">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+
+                        </th>
                         <th>Display Name</th>
                         <th>Account</th>
                         <th>Location

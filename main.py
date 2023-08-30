@@ -8,16 +8,26 @@ def index():
     conn = sqlite3.connect('followers.db')
     cursor = conn.cursor()
 
-    sort_location_order = request.args.get('sort_location', 'asc')  # Default sorting order is ascending
-    if sort_location_order == 'asc':
-        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY location ASC')
-    else:
-        cursor.execute('SELECT * FROM followers WHERE is_deleted = 0 ORDER BY location DESC')
+    sort_location = request.args.get('sort_location', 'asc')
+    sort_created_at = request.args.get('sort_created_at', 'asc')
 
+    if sort_location == 'asc':
+        location_order = 'ASC'
+    else:
+        location_order = 'DESC'
+
+    if sort_created_at == 'asc':
+        created_at_order = 'ASC'
+    else:
+        created_at_order = 'DESC'
+
+    cursor.execute(f'SELECT * FROM followers WHERE is_deleted = 0 ORDER BY location {location_order}, created_at {created_at_order}')
     followers = cursor.fetchall()
 
     conn.close()
-    return render_template('index.html', followers=followers)
+    return render_template('index.html', followers=followers, sort_location=sort_location, sort_created_at=sort_created_at)
+
+
 
 @app.route('/add_follower', methods=['GET', 'POST'])
 def add_follower():
