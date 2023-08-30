@@ -1,3 +1,3 @@
 # fedi-address-book
-An address book for Mastodon followers
+An address book for Fediverse followers
 
