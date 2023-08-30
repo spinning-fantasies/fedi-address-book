@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Followers List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://www.jsdelivr.com/package/npm/@creativebulma/bulma-tooltip">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Update Followers List
+            </h1>
+            
+            <form method="post" enctype="multipart/form-data">
+                <label for="file">Upload JSON File:</label>
+                <input class="is-link" type="file" name="file" id="file">
+                <button class="button is-primary" type="submit">Update Followers List</button>
+            </form>
+            
+            <a class="is-link" href="{{ url_for('index') }}">Back to Followers List</a>
+        </div>
+    </section>
+    <!-- Add your scripts and footer content here -->
+</body>
+</html>

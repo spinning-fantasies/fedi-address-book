@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
+import json
 
 app = Flask(__name__)
+app.secret_key = 'yool'
 
 @app.route('/')
 def index():
@@ -27,8 +29,6 @@ def index():
     conn.close()
     return render_template('index.html', followers=followers, sort_location=sort_location, sort_created_at=sort_created_at)
 
-
-
 @app.route('/add_follower', methods=['GET', 'POST'])
 def add_follower():
     if request.method == 'POST':
@@ -48,6 +48,32 @@ def add_follower():
     
     return render_template('add_follower.html')
 
+def update_database_with_new_followers(new_followers_data):
+    conn = sqlite3.connect('followers.db')
+    cursor = conn.cursor()
+
+    # Insert new data
+    for follower in new_followers_data:
+        cursor.execute('INSERT INTO followers (created_at, display_name, acct) VALUES (?, ?, ?)''', (follower['created_at'], follower['display_name'], follower['acct']))
+
+    conn.commit()
+    conn.close()
+
+@app.route('/update_followers_list', methods=['GET', 'POST'])
+def update_followers_list():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and file.filename.endswith('.json'):
+            file_content = file.read()
+            try:
+                new_followers_data = json.loads(file_content)
+                update_database_with_new_followers(new_followers_data)
+                flash('Followers list updated successfully!', 'success')
+            except json.JSONDecodeError:
+                flash('Invalid JSON format. Please upload a valid JSON file.', 'error')
+        else:
+            flash('Please upload a valid JSON file.', 'error')
+    return render_template('update_followers_list.html')
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
