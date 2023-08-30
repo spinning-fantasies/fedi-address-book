@@ -49,8 +49,9 @@ def edit(id):
 
     if request.method == 'POST':
         location = request.form['location']
+        display_name = request.form['display_name']
 
-        cursor.execute('UPDATE followers SET location = ? WHERE id = ?', (location, id))
+        cursor.execute('UPDATE followers SET location = ?, display_name = ? WHERE id = ?', (location, display_name,  id))
         conn.commit()
 
         cursor.execute('SELECT * FROM followers WHERE is_deleted = 0')
