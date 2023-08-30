@@ -3,3 +3,4 @@ bin/
 lib/
 fediversaries.ics
 followers.*
+pyvenv.cfg
