@@ -1,11 +1,30 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_httpauth import HTTPBasicAuth
 import sqlite3
 import json
+import datetime
+import sqlite3
+import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'yool'
+auth = HTTPBasicAuth()
+
+users = {
+    os.getenv("USERNAME"): os.getenv("PASSWORD"),
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and users[username] == password:
+        return username
 
 @app.route('/')
+@auth.login_required
 def index():
     conn = sqlite3.connect('followers.db')
     cursor = conn.cursor()
@@ -30,6 +49,7 @@ def index():
     return render_template('index.html', followers=followers, sort_location=sort_location, sort_created_at=sort_created_at)
 
 @app.route('/add_follower', methods=['GET', 'POST'])
+@auth.login_required
 def add_follower():
     if request.method == 'POST':
         created_at = request.form['created_at']
@@ -60,6 +80,7 @@ def update_database_with_new_followers(new_followers_data):
     conn.close()
 
 @app.route('/update_followers_list', methods=['GET', 'POST'])
+@auth.login_required
 def update_followers_list():
     if request.method == 'POST':
         file = request.files['file']
@@ -76,6 +97,7 @@ def update_followers_list():
     return render_template('update_followers_list.html')
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@auth.login_required
 def edit(id):
     conn = sqlite3.connect('followers.db')
     cursor = conn.cursor()
@@ -101,6 +123,7 @@ def edit(id):
 
 
 @app.route('/delete/<int:id>')
+@auth.login_required
 def delete(id):
     conn = sqlite3.connect('followers.db')
     cursor = conn.cursor()
@@ -114,5 +137,5 @@ def delete(id):
     conn.close()
     return render_template('index.html', followers=followers)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
