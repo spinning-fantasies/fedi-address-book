@@ -32,8 +32,9 @@
                     {% for follower in followers %}
                         <tr>
                             <!-- <td>{{ follower[1] }}</td>  -->
-                            <td class="date-cell" data-date="{{ follower[1] }}">
-                                {{ follower[1] }} 
+                            <!-- <td class="date-cell" data-date="{{ follower[1] }}"> -->
+                            <td class="date-cell">{{ follower[1] }}</td>
+                                <!-- {{ follower[1] }}  -->
                             </td>
                             <td>{{ follower[2] }}</td>
                             <td>{{ follower[3] }}</td>
@@ -53,30 +54,27 @@
         document.addEventListener("DOMContentLoaded", function () {
             const dateCells = document.querySelectorAll(".date-cell");
             dateCells.forEach(function (cell) {
-                console.log(cell)
-                
                 const dateString = cell.textContent; // Assuming the date is in the format 'YYYY-MM-DD'
-                console.log(dateString)
-
                 const dateParts = dateString.split("-");
-                console.log(dateParts)
-
-                const dateValue = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // Month is zero-based
-                console.log(dateValue)
-
-                const currentDate = new Date();
-                console.log(currentDate)
-
-                const timeDifference = currentDate - dateValue;
-                console.log(timeDifference)
-
+                const anniversaryDate = new Date();
+                anniversaryDate.setFullYear(new Date().getFullYear(), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10));
+                if (anniversaryDate < new Date()) {
+                    anniversaryDate.setFullYear(anniversaryDate.getFullYear() + 1);
+                }
+                const timeDifference = anniversaryDate - new Date();
                 const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                console.log(daysDifference)
 
-                cell.title = `In ${daysDifference} days`;
+                if (daysDifference == 0) {
+                    cell.title = `Anniversary is today !!! 🎉🎂🥳`;
+                }  else if (daysDifference == 1) {
+                    cell.title = `Anniversary is tomorrow`;
+                } else {
+                    cell.title = `Anniversary is in ${daysDifference} days !`;
+                }
             });
         });
     </script>
+    
     
     
 </body>
