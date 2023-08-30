@@ -31,13 +31,10 @@
                 <tbody>
                     {% for follower in followers %}
                         <tr>
-                            <!-- <td>{{ follower[1] }}</td>  -->
-                            <!-- <td class="date-cell" data-date="{{ follower[1] }}"> -->
                             <td class="date-cell">{{ follower[1] }}</td>
-                                <!-- {{ follower[1] }}  -->
                             </td>
                             <td>{{ follower[2] }}</td>
-                            <td>{{ follower[3] }}</td>
+                            <td class="acct-cell">{{ follower[3] }}</td>
                             <td>{{ follower[4] }}</td>
                             <td>
                                 <a class="button is-small is-info" href="{{ url_for('edit', id=follower[0]) }}">Edit</a>
@@ -72,6 +69,27 @@
                     cell.title = `Anniversary is in ${daysDifference} days !`;
                 }
             });
+
+            const acctCells = document.querySelectorAll(".acct-cell");
+             console.log(acctCells);
+
+             acctCells.forEach(function(cell) {
+                const accountParts = cell.textContent.split("@");
+                // console.log(accountParts);
+
+                const instance = accountParts[1];
+                // console.log(instance);
+
+                const username = accountParts[0];
+                // console.log(username)
+
+                const formattedAccount = `${instance}/@${username}`
+                // console.log(formattedAccount);
+
+                cell.textContent = formattedAccount;
+             });
+
+
         });
     </script>
     
