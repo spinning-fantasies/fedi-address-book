@@ -3,6 +3,7 @@
 <head>
     <title>Fediverse Address Book</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://www.jsdelivr.com/package/npm/@creativebulma/bulma-tooltip">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -30,7 +31,10 @@
                 <tbody>
                     {% for follower in followers %}
                         <tr>
-                            <td>{{ follower[1] }}</td>
+                            <!-- <td>{{ follower[1] }}</td>  -->
+                            <td class="date-cell" data-date="{{ follower[1] }}">
+                                {{ follower[1] }} 
+                            </td>
                             <td>{{ follower[2] }}</td>
                             <td>{{ follower[3] }}</td>
                             <td>{{ follower[4] }}</td>
@@ -44,5 +48,36 @@
             </table>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateCells = document.querySelectorAll(".date-cell");
+            dateCells.forEach(function (cell) {
+                console.log(cell)
+                
+                const dateString = cell.textContent; // Assuming the date is in the format 'YYYY-MM-DD'
+                console.log(dateString)
+
+                const dateParts = dateString.split("-");
+                console.log(dateParts)
+
+                const dateValue = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // Month is zero-based
+                console.log(dateValue)
+
+                const currentDate = new Date();
+                console.log(currentDate)
+
+                const timeDifference = currentDate - dateValue;
+                console.log(timeDifference)
+
+                const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                console.log(daysDifference)
+
+                cell.title = `In ${daysDifference} days`;
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>
