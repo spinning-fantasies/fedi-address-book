@@ -51,3 +51,9 @@ Launch the web server :
 python main.py
 ```
 
+Print the differences between two json files :
+
+```
+diff <(jq -S . file1.json) <(jq -S . file2.json)
+```
+
