@@ -30,10 +30,10 @@
                         <th>Display Name</th>
                         <th>Account</th>
                         <th>Location
-                            <a href="{{ url_for('index', sort_location='asc') }}">
+                            <a href="{{ url_for('index', sort_created_at=sort_created_at, sort_location='asc') }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{ url_for('index', sort_location='desc') }}">
+                            <a href="{{ url_for('index', sort_created_at=sort_created_at, sort_location='desc') }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </th>
