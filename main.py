@@ -42,7 +42,7 @@ def index():
     else:
         created_at_order = 'DESC'
 
-    cursor.execute(f'SELECT * FROM followers WHERE is_deleted = 0 ORDER BY created_at {created_at_order}, location {location_order}')
+    cursor.execute(f'SELECT * FROM followers WHERE is_deleted = 0 ORDER BY  location {location_order}')
     followers = cursor.fetchall()
 
     conn.close()
