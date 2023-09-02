@@ -54,6 +54,8 @@ python main.py
 Print the differences between two json files :
 
 ```
-diff <(jq -S . file1.json) <(jq -S . file2.json)
+diff <(jq -S . file1.json) <(jq -S . file2.json) > differences.json
 ```
+
+Then clean to have a valid ``differences.json`` and import it through the web ui
 
