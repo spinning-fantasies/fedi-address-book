@@ -1,4 +1,5 @@
-# fedi-address-book
+# fedi-contacts
+
 An address book for Fediverse followers
 
 ## Installation
@@ -23,7 +24,7 @@ Install the dependencies :
 python -m pip install -r requirements.txt
 ```
 
-Add environment variables to ``.env`` :
+Add environment variables to `.env` :
 
 ```
 MASTODON_INSTANCE_URL=<your_mastodon_instance_url>
@@ -57,5 +58,4 @@ Print the differences between two json files :
 diff <(jq -S . file1.json) <(jq -S . file2.json) > differences.json
 ```
 
-Then clean to have a valid ``differences.json`` and import it through the web ui
-
+Then clean to have a valid `differences.json` and import it through the web ui
